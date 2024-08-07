@@ -1,6 +1,7 @@
 import express from "express";
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import { expressJoiValidations } from "express-joi-validations";
 const port = 5000;
 
 const app = express();
@@ -8,7 +9,7 @@ const app = express();
 
 
 app.use(express.json());
-
+app.use(expressJoiValidations({  }));
 
 // apis for product
 // /api/products   ---- getAll Products--- add product--query
