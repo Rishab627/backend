@@ -1,15 +1,23 @@
 import express from "express";
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
-import { expressJoiValidations } from "express-joi-validations";
+import mongoose from "mongoose";
+
+
 const port = 5000;
 
 const app = express();
 
-
+mongoose.connect('mongodb+srv://merishabjoshi:Rishab!23@cluster0.jexmr.mongodb.net/ShopUs').then((val) => {
+  app.listen(port, (e) => {
+    console.log('connected');
+  });
+  // console.log(val);
+}).catch((err) => {
+  console.log(err);
+});
 
 app.use(express.json());
-app.use(expressJoiValidations({  }));
 
 // apis for product
 // /api/products   ---- getAll Products--- add product--query
@@ -55,6 +63,3 @@ app.use('/api/users', userRoutes);
 // app.use('/api/users/login', userRoutes);
 
 
-app.listen(port, (e) => {
-  console.log('connected');
-});
