@@ -1,5 +1,6 @@
 import { User } from "../models/User.js";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 export const getAllUsers = (req, res) => {
     return res.status(200).json({data: 'all users'});
@@ -7,10 +8,24 @@ export const getAllUsers = (req, res) => {
 
 
 export const loginUser = async (req, res) => {
+    const {email, password} = req.body;
     try {
-        await User.create(req.body);
-        return res.status(201).json({message: 'Successfully Registered'});
-    } catch (err) {
+        const isExist = await User.findOne({email});
+        if (!isExist) return res.status(404).json({message: 'user doesn\'t exist'})
+        
+        const pass = bcrypt.compareSync(password, isExist.password);
+        if (!pass) return res.status(401).json({message: 'invalid password'});
+
+        const token = jwt.sign({
+            id: isExist._id,
+            isAdmin : isExist.isAdmin
+        }, 'secret');
+        return res.status(200).json({
+            token,
+            email: isExist.email,
+            fullname: isExist.fullname
+        })
+        } catch (err) {
         
     }
 }
