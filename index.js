@@ -2,6 +2,9 @@ import express from "express";
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import mongoose from "mongoose";
+import cors from "cors";
+import morgan from "morgan";
+
 
 
 const port = 5000;
@@ -18,6 +21,8 @@ mongoose.connect('mongodb+srv://merishabjoshi:Rishab!23@cluster0.jexmr.mongodb.n
 });
 
 app.use(express.json());
+app.use(cors());
+app.use(morgan('dev'));
 
 // apis for product
 // /api/products   ---- getAll Products--- add product--query

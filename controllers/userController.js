@@ -23,10 +23,11 @@ export const loginUser = async (req, res) => {
         return res.status(200).json({
             token,
             email: isExist.email,
-            fullname: isExist.fullname
+            fullname: isExist.fullname,
+            isAdmin: isExist.isAdmin
         })
         } catch (err) {
-        
+        return res.status(400).json({ error: `${err}`})
     }
 }
 
@@ -35,7 +36,7 @@ export const loginUser = async (req, res) => {
 export const registerUser = async (req, res) => {
     const {email, password, fullname} = req.body;
     try {
-        const isExist = await User.findOne({email: email});
+        const isExist = await User.findOne({email});
         if (isExist) {
         return res.status(409).json({message: 'Email already in use'});
         } 
