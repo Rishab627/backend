@@ -3,7 +3,8 @@ import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import mongoose from "mongoose";
 import morgan from "morgan";
-
+import cors from "cors";
+import fileUpload from "express-fileupload";
 
 
 
@@ -22,7 +23,12 @@ mongoose.connect('mongodb+srv://merishabjoshi:Rishab!23@cluster0.jexmr.mongodb.n
 });
 
 app.use(express.json());
+app.use(cors());
 app.use(morgan('dev'));
+app.use(fileUpload({
+  limits: {fileSize: 1 * 1024 * 1024 },
+  abortOnLimit: true
+}));
 
 // apis for product
 // /api/products   ---- getAll Products--- add product--query
