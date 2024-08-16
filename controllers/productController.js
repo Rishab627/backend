@@ -55,7 +55,7 @@ export const removeProduct = async (req, res) => {
 
     try {
      
-        return res.status(200).json({message: 'product added successfully'});
+        return res.status(200).json({});
         
     } catch (err) {
         // fs.unlink(`.${req.imagePath}`, (err) => {
