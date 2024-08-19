@@ -24,8 +24,11 @@ mongoose.connect('mongodb+srv://merishabjoshi:Rishab!23@cluster0.jexmr.mongodb.n
   console.log(err);
 });
 
+
+
 app.use(express.json());
 app.use(cors());
+app.use('/uploads', express.static('uploads'));
 app.use(morgan('dev'));
 app.use(fileUpload({
   limits: {fileSize: 1 * 1024 * 1024 },
