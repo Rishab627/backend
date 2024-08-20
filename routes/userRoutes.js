@@ -10,9 +10,7 @@ const validator = expressJoi.createValidator({
 
 const loginSchema = Joi.object({
   email: Joi.string().email().required(),
-  password: Joi.string().pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/).required().messages({
-    'string.pattern.base': `provide strong password that have number special character`,
-  })
+  password: Joi.string().required()
 });
 
 const registerSchema = Joi.object({

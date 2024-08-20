@@ -12,7 +12,6 @@ import fileUpload from "express-fileupload";
 const port = 5000;
 
 const app = express();
-const per = {};
 
 
 mongoose.connect('mongodb+srv://merishabjoshi:Rishab!23@cluster0.jexmr.mongodb.net/ShopUs').then((val) => {

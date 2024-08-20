@@ -26,8 +26,8 @@ export const loginUser = async (req, res) => {
             fullname: isExist.fullname,
             isAdmin: isExist.isAdmin
         })
-        } catch (err) {
-        return res.status(400).json({ error: `${err}`})
+        } catch (error) {
+        return res.status(400).json({ error: `${error}`})
     }
 }
 
